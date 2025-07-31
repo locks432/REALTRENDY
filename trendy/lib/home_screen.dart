@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:trendy/api_service.dart';
+import 'package:trendy/data/dummy_data.dart';
 import 'package:trendy/discover_screen.dart';
 import 'package:trendy/post_creation_screen.dart';
 import 'package:trendy/profile_screen.dart';
+import 'package:trendy/views/feed_view.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,15 +15,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  late Future<List<Post>> _feed;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: Text('Home Feed'),
-    ),
-    DiscoverScreen(),
-    PostCreationScreen(),
-    ProfileScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _feed = _fetchFeed();
+  }
+
+  Future<List<Post>> _fetchFeed() async {
+    final apiService = ApiService();
+    final movies = await apiService.getPopularMovies();
+    final songs = await apiService.getNewReleases();
+
+    final List<Post> posts = [];
+    posts.addAll(movies.map((movie) => Post(item: movie, type: PostType.movie)));
+    posts.addAll(songs.map((song) => Post(item: song, type: PostType.song)));
+
+    posts.shuffle();
+
+    return posts;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,11 +45,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> widgetOptions = <Widget>[
+      FutureBuilder<List<Post>>(
+        future: _feed,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return FeedView(posts: snapshot.data!);
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('${snapshot.error}'),
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+      const DiscoverScreen(),
+      const PostCreationScreen(),
+      const ProfileScreen(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Trendy'),
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
