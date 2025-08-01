@@ -49,5 +49,16 @@
 	<string>This app needs camera access to make video calls.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs microphone access to make voice calls.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>REVERSED_CLIENT_ID</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
