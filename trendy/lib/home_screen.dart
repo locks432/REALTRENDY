@@ -5,6 +5,7 @@ import 'package:trendy/discover_screen.dart';
 import 'package:trendy/post_creation_screen.dart';
 import 'package:trendy/profile_screen.dart';
 import 'package:trendy/views/feed_view.dart';
+import 'package:trendy/views/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -69,6 +70,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Trendy'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.notifications_none),
+          ),
+        ],
       ),
       body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
