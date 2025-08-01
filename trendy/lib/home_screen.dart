@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:trendy/api_service.dart';
 import 'package:trendy/data/dummy_data.dart';
 import 'package:trendy/discover_screen.dart';
-import 'package:trendy/post_creation_screen.dart';
 import 'package:trendy/profile_screen.dart';
 import 'package:trendy/views/feed_view.dart';
 import 'package:trendy/views/notification_screen.dart';
 import 'package:trendy/views/chat/conversation_list_screen.dart';
+import 'package:trendy/views/post_creation/post_creation_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
