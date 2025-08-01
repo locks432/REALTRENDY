@@ -63,7 +63,11 @@ class HomeScreen extends StatelessWidget {
                   UniverseTile(title: 'TrendBlocks', icon: Icons.view_quilt, screen: TrendBlocksScreen()),
                   UniverseTile(title: 'MicDrop', icon: Icons.mic, screen: MicDropScreen()),
                   UniverseTile(title: 'Fusion', icon: Icons.merge_type, screen: FusionScreen()),
-                  UniverseTile(title: 'DreamSpace', icon: Icons.person, screen: DreamSpaceScreen()),
+                  UniverseTile(
+                    title: 'DreamSpace',
+                    icon: Icons.person,
+                    screen: ProfileScreen(isOwner: true),
+                  ),
                 ],
               ),
               Positioned(
