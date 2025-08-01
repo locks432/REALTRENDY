@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:countup/countup.dart';
 
 class StatsRow extends StatelessWidget {
   const StatsRow({super.key});
@@ -8,18 +9,21 @@ class StatsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _buildStatItem('Followers', '10.2k'),
-        _buildStatItem('Following', '543'),
-        _buildStatItem('Likes', '1.2M'),
+        _buildStatItem('Followers', 10200),
+        _buildStatItem('Following', 543),
+        _buildStatItem('Likes', 1200000),
       ],
     );
   }
 
-  Widget _buildStatItem(String label, String value) {
+  Widget _buildStatItem(String label, double value) {
     return Column(
       children: [
-        Text(
-          value,
+        Countup(
+          begin: 0,
+          end: value,
+          duration: const Duration(seconds: 3),
+          separator: ',',
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,

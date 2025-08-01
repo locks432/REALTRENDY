@@ -3,6 +3,11 @@ import 'package:trendy/views/profile/profile_header.dart';
 import 'package:trendy/views/profile/stats_row.dart';
 import 'package:trendy/views/profile/floating_media_fab.dart';
 import 'package:trendy/views/profile/profile_footer.dart';
+import 'package:trendy/views/profile/posts_grid.dart';
+import 'package:trendy/views/profile/reels_view.dart';
+import 'package:trendy/views/profile/highlights_view.dart';
+import 'package:trendy/views/profile/saved_posts_view.dart';
+import 'package:trendy/views/profile/trendy_score_view.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -62,11 +67,11 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
               child: TabBarView(
                 controller: _tabController,
                 children: const [
-                  Center(child: Text('Posts')),
-                  Center(child: Text('Reels')),
-                  Center(child: Text('Highlights')),
-                  Center(child: Text('Saved')),
-                  Center(child: Text('Trendy Score')),
+                  PostsGrid(),
+                  ReelsView(),
+                  HighlightsView(),
+                  SavedPostsView(),
+                  TrendyScoreView(),
                 ],
               ),
             ),
